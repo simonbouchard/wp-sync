@@ -158,18 +158,22 @@ wizard () {
 #
 #|--------------------------------------------------------------------------
 "
+        while true; do
         echo -e "\n[${RED}!${NC}] Do you want to continue? (YES/NO)"
         read confirm
-        if [[ $confirm == [nN]o || $confirm == [nN] ]]
-        then
+        confirm=$(echo "$confirm" | tr '[:lower:]' '[:upper:]')  # convert to uppercase
+        if [[ $confirm == "NO" ]]; then
                 echo -e "\n[${RED}✗${NC}] Aborting..."
                 exit 1
+        elif [[ $confirm == "YES" ]]; then
+                echo -e "\n[${PURPLE}i${NC}] Starting the migration ..."
+                sleep 2
+                execute_migration
+        else
+                echo -e "[${BLUE}i${NC}] Please enter YES or NO."
         fi
-
-        echo -e "\n[${PURPLE}i${NC}] Starting the migration ..."
-        sleep 2
-        execute_migration
-
+        done 
+ 
 }
 
 execute_migration () {
