@@ -220,6 +220,7 @@ EOF
 
         echo -e "\n[${GREEN}✓${NC}] Migration completed successfully!"
         echo -e "[${PURPLE}i${NC}] View your site at ${PURPLE}$REMOTE_SITE_URL${NC}\n"
+        exit 1
 
 }
 
