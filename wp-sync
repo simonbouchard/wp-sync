@@ -76,62 +76,63 @@ wizard () {
         fi
 
         # Read answers from user input
-        printf "\n${PURPLE}WordPress Migration Helper${NC}\n"
-        printf "${PURPLE}By Layer 7 Web Hosting Inc.${NC}\n\n"
-        printf "${CYAN}Current WordPress path: ${NC}%s\n" "$(pwd)"
+        printf "\n${PURPLE}${BOLD}WP-Sync${NC}"
+        printf "\n${PURPLE}WordPress Migration Helper${NC}"
+        printf "\n${PURPLE}By Layer 7 Web Hosting Inc.${NC}\n\n"
+        printf "Current WordPress path: ${CYAN}%s${NC}\n" "$(pwd)"
         if command -v wp > /dev/null; then
-                printf "${CYAN}Current WordPress URL: ${NC}%s\n" "$(wp option get siteurl)"
+                printf "Current WordPress URL: ${CYAN}%s${NC}\n" "$(wp option get siteurl)"
         else
-                printf "${CYAN}Current WordPress URL: ${NC}WP-CLI not installed\n"
+                printf "Current WordPress URL: ${CYAN}WP-CLI not installed${NC}\n"
         fi 
         printf "\n"
 
-        echo -e "[${BLUE}?${NC}] Source absolute home path: [$LOCAL_HPATH]:" 
+        echo -e "[${BLUE}?${NC}] Source absolute home path: [${CYAN}$LOCAL_HPATH${NC}]:" 
         read NEW_LOCAL_HPATH
         LOCAL_HPATH=${NEW_LOCAL_HPATH:-$LOCAL_HPATH}
         echo "$LOCAL_HPATH" > $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Source absolute public path: [$LOCAL_PPATH]:" 
+        echo -e "[${BLUE}?${NC}] Source absolute public path: [${CYAN}$LOCAL_PPATH${NC}]:" 
         read NEW_LOCAL_PPATH
         LOCAL_PPATH=${NEW_LOCAL_PPATH:-$LOCAL_PPATH}
         echo "$LOCAL_PPATH" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Source site URL: [$LOCAL_SITE_URL]:" 
+        echo -e "[${BLUE}?${NC}] Source site URL: [${CYAN}$LOCAL_SITE_URL${NC}]:" 
         read NEW_LOCAL_SITE_URL
         LOCAL_SITE_URL=${NEW_LOCAL_SITE_URL:-$LOCAL_SITE_URL}
         echo "$LOCAL_SITE_URL" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Excluded files: [$LOCAL_DO_NOT_COPY]:" 
+        echo -e "[${BLUE}?${NC}] Excluded files: [${CYAN}$LOCAL_DO_NOT_COPY${NC}]:" 
         read NEW_LOCAL_DO_NOT_COPY
         LOCAL_DO_NOT_COPY=${NEW_LOCAL_DO_NOT_COPY:-$LOCAL_DO_NOT_COPY}
         echo "$LOCAL_DO_NOT_COPY" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Destination absolute home path: [$REMOTE_HPATH]:" 
+        echo -e "[${BLUE}?${NC}] Destination absolute home path: [${CYAN}$REMOTE_HPATH${NC}]:" 
         read NEW_REMOTE_HPATH
         REMOTE_HPATH=${NEW_REMOTE_HPATH:-$REMOTE_HPATH}
         echo "$REMOTE_HPATH" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Destination absolute public path: [$REMOTE_PPATH]:" 
+        echo -e "[${BLUE}?${NC}] Destination absolute public path: [${CYAN}$REMOTE_PPATH${NC}]:" 
         read NEW_REMOTE_PPATH
         REMOTE_PPATH=${NEW_REMOTE_PPATH:-$REMOTE_PPATH}
         echo "$REMOTE_PPATH" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Destination server hostname/IPv4: [$REMOTE_SERVER]:" 
+        echo -e "[${BLUE}?${NC}] Destination server hostname/IPv4: [${CYAN}$REMOTE_SERVER${NC}]:" 
         read NEW_REMOTE_SERVER
         REMOTE_SERVER=${NEW_REMOTE_SERVER:-$REMOTE_SERVER}
         echo "$REMOTE_SERVER" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Destination server port: [$REMOTE_PORT]:" 
+        echo -e "[${BLUE}?${NC}] Destination server port: [${CYAN}$REMOTE_PORT${NC}]:" 
         read NEW_REMOTE_PORT
         REMOTE_PORT=${NEW_REMOTE_PORT:-$REMOTE_PORT}
         echo "$REMOTE_PORT" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Destination server username: [$REMOTE_USER]:" 
+        echo -e "[${BLUE}?${NC}] Destination server username: [${CYAN}$REMOTE_USER${NC}]:" 
         read NEW_REMOTE_USER
         REMOTE_USER=${NEW_REMOTE_USER:-$REMOTE_USER}
         echo "$REMOTE_USER" >> $ANSWERS_FILE
 
-        echo -e "[${BLUE}?${NC}] Destination site URL: [$REMOTE_SITE_URL]:" 
+        echo -e "[${BLUE}?${NC}] Destination site URL: [${CYAN}$REMOTE_SITE_URL${NC}]:" 
         read NEW_REMOTE_SITE_URL
         REMOTE_SITE_URL=${NEW_REMOTE_SITE_URL:-$REMOTE_SITE_URL}
         echo "$REMOTE_SITE_URL" >> $ANSWERS_FILE
@@ -141,25 +142,25 @@ wizard () {
 #
 # Here's a summary of the migration informations before continuing:
 # 
-# ${CYAN}Source absolute home path${NC}: $LOCAL_HPATH
-# ${CYAN}Source absolute public path${NC}: $LOCAL_PPATH
-# ${CYAN}Source site URL${NC}: $LOCAL_SITE_URL
-# ${CYAN}Excluded files${NC}: $LOCAL_DO_NOT_COPY
-# ${CYAN}Destination absolute home path${NC}: $REMOTE_HPATH
-# ${CYAN}Destination absolute public path${NC}: $REMOTE_PPATH
-# ${CYAN}Destination server hostname/IPv4${NC}: $REMOTE_SERVER
-# ${CYAN}Destination server port${NC}: $REMOTE_PORT
-# ${CYAN}Destination server username${NC}: $REMOTE_USER
-# ${CYAN}Destination site URL${NC}: $REMOTE_SITE_URL
+# Source absolute home path: ${CYAN}$LOCAL_HPATH${NC}
+# Source absolute public path: ${CYAN}$LOCAL_PPATH${NC}
+# Source site URL: ${CYAN}$LOCAL_SITE_URL${NC}
+# Excluded files: ${CYAN}$LOCAL_DO_NOT_COPY${NC}
+# Destination absolute home path: ${CYAN}$REMOTE_HPATH${NC}
+# Destination absolute public path: ${CYAN}$REMOTE_PPATH${NC}
+# Destination server hostname/IPv4: ${CYAN}$REMOTE_SERVER${NC}
+# Destination server port: ${CYAN}$REMOTE_PORT${NC}
+# Destination server username: ${CYAN}$REMOTE_USER${NC}
+# Destination site URL: ${CYAN}$REMOTE_SITE_URL${NC}
 #
-# [${RED}WARNING${NC}] 
+# ${RED}WARNING${NC} 
 # This will overwrite the existing remote WordPress installation with the current installation.
-# The remote WordPress database will be backed up in the $REMOTE_HPATH directory in case of a problem.
+# The remote WordPress database will be backed up in the ${CYAN}$REMOTE_HPATH${NC} directory in case of a problem.
 #
 #|--------------------------------------------------------------------------
 "
         while true; do
-        echo -e "\n[${RED}!${NC}] Do you want to continue? (YES/NO)"
+        echo -e "\n[${RED}?${NC}] Do you want to continue? (YES/NO)"
         read confirm
         confirm=$(echo "$confirm" | tr '[:lower:]' '[:upper:]')  # convert to uppercase
         if [[ $confirm == "NO" ]]; then
