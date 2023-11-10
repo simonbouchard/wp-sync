@@ -45,6 +45,20 @@ REMOTE_PORT="22"
 REMOTE_USER=
 REMOTE_SITE_URL=
 RSYNC_OPTIONS=(-Pavz --info=progress2 --delete --exclude={$LOCAL_DO_NOT_COPY})
+SLEEP=1
+
+# Make sure the script is being executed with superuser privileges.
+if [[ "${UID}" -ne 0 ]]
+then
+
+  echo
+  echo "  Please run with sudo or as root." >&2
+  echo
+  sleep ${SLEEP}
+
+  exit 1
+
+fi
 
 #|--------------------------------------------------------------------------
 #| Wizard
@@ -76,9 +90,10 @@ wizard () {
         fi
 
         # Read answers from user input
-        printf "\n${PURPLE}${BOLD}WP-Sync${NC}"
-        printf "\n${PURPLE}WordPress Migration Helper${NC}"
-        printf "\n${PURPLE}By Layer 7 Web Hosting Inc.${NC}\n\n"
+        printf "\n${PURPLE}#########################################${NC}"
+        printf "\n${PURPLE}WordPress Migration Helper v1.0.1${NC}"
+        printf "\n${PURPLE}By Layer 7 Web Hosting Inc.${NC}\n"
+        printf "${PURPLE}#########################################${NC}\n\n"
         printf "Current WordPress path: ${CYAN}%s${NC}\n" "$(pwd)"
         if command -v wp > /dev/null; then
                 printf "Current WordPress URL: ${CYAN}%s${NC}\n" "$(wp option get siteurl)"
