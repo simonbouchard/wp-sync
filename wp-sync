@@ -47,19 +47,6 @@ REMOTE_SITE_URL=
 RSYNC_OPTIONS=(-Pavz --info=progress2 --delete --exclude={$LOCAL_DO_NOT_COPY})
 SLEEP=1
 
-# Make sure the script is being executed with superuser privileges.
-if [[ "${UID}" -ne 0 ]]
-then
-
-  echo
-  echo "  Please run with sudo or as root." >&2
-  echo
-  sleep ${SLEEP}
-
-  exit 1
-
-fi
-
 #|--------------------------------------------------------------------------
 #| Wizard
 #|--------------------------------------------------------------------------
@@ -175,9 +162,9 @@ wizard () {
 #|--------------------------------------------------------------------------
 "
         while true; do
-        echo -e "\n[${RED}?${NC}] Do you want to continue? (YES/NO)"
-        read confirm
-        confirm=$(echo "$confirm" | tr '[:lower:]' '[:upper:]')  # convert to uppercase
+                echo -e "\n[${RED}?${NC}] Do you want to continue? (YES/NO)"
+                read confirm
+                confirm=$(echo "$confirm" | tr '[:lower:]' '[:upper:]')  # convert to uppercase
         if [[ $confirm == "NO" ]]; then
                 echo -e "\n[${RED}✗${NC}] Aborting..."
                 exit 1
